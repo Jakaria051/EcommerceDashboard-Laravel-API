@@ -50,4 +50,39 @@ class ProductController extends Controller
     {
         return Product::all();
     }
+
+    public function productDetail($id)
+    {
+        $data = Product::where('id',$id)->first();
+        if ($data) {
+            return response()->json(['result' => $data, 'status_code' => 200]);
+        }
+        return response()->json(['result' => 'Operation failed!','status_code' => 404]);
+    }
+    
+    public function updateProduct($id,Request $request)
+    {
+        $product = Product::find($id);
+        $product->product_name = $request->input("product_name");
+        $product->description = $request->input("description");
+        $product->price = $request->input("price");
+        if ($request->file('file_path')) {
+            $product->file_path = $request->file_path->store('products');
+            
+        }
+        $product->save();
+        if($product) {
+            return response()->json(['result' => $product, 'status_code' => 201]);
+        }
+        return response()->json(['result' => 'Operation failed!','status_code' => 404]);
+    }
+
+    public function deleteProduct($id)
+    {
+        $delete = Product::where('id',$id)->delete();
+        if ($delete) {
+            return response()->json(['result' => 'Product has been deleted','status_code' => 200]);
+        }
+        return response()->json(['result' => 'Operation failed!','status_code' => 404]);
+    }
 }

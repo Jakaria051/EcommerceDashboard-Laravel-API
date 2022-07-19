@@ -32,7 +32,7 @@ class AuthService extends BaseService
     public function getProfile()
     {
         $id = auth()->id();
-        return User::with('userDeatails')->where('id', $id)->first();
+        return User::where('id', $id)->first();
     }
 
     public function allProfile()
