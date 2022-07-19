@@ -85,4 +85,9 @@ class ProductController extends Controller
         }
         return response()->json(['result' => 'Operation failed!','status_code' => 404]);
     }
+
+    public function searchProduct($key) 
+    {
+        return Product::where('product_name','Like',"%$key%")->get();
+    }
 }

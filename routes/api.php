@@ -43,4 +43,4 @@ Route::get('product-list',[ProductController::class,'listOfProduct'])->name('lis
 Route::get('product-detail/{id}',[ProductController::class,'productDetail'])->name('details.product');
 Route::post('update-product/{id}',[ProductController::class,'updateProduct'])->name('update.product');
 Route::delete('delete-product/{id}',[ProductController::class,'deleteProduct'])->name('delete.product');
-
+Route::get('search/{key}',[ProductController::class,'searchProduct'])->name('search.product');
